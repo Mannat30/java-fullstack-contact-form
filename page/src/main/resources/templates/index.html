@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Page</title>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2>Learn Java</h2>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+</nav>
+
+
+<section class="hero">
+
+    <h1>Java Full Stack Development</h1>
+
+    <p>
+        Learn Spring Boot,
+        REST API,
+        MySQL and Full Stack Development
+    </p>
+
+    <button>
+        Join Now
+    </button>
+
+</section>
+
+
+<section id="about">
+
+    <h2>About Course</h2>
+
+    <p>
+        Learn complete backend and frontend
+        development using Java technologies.
+    </p>
+
+</section>
+
+
+<section id="features">
+
+    <h2>Features</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+
+            <h3>Spring Boot</h3>
+            <p>Build REST API</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>MySQL</h3>
+            <p>Database Management</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Frontend</h3>
+            <p>HTML CSS JavaScript</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="contact">
+
+    <h2>Contact Us</h2>
+
+    <form id="contactform">
+
+        <input type="text"
+               id="name"
+               placeholder="Enter name"
+               required>
+
+        <input type="email"
+               id="email"
+               placeholder="Enter email"
+               required>
+
+        <input type="text"
+               id="phone"
+               placeholder="Enter phone"
+               required>
+
+        <input type="text"
+               id="subject"
+               placeholder="Enter subject"
+               required>
+
+        <button type="button"
+                onclick="saveData()">
+
+            Save Data
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <p>
+        2026 Java Full Stack
+    </p>
+
+</footer>
+
+
+<script>
+
+    async function saveData(){
+
+        let data={
+
+            name:
+            document.getElementById("name").value,
+
+            email:
+            document.getElementById("email").value,
+
+            phone:
+            document.getElementById("phone").value,
+
+            subject:
+            document.getElementById("subject").value
+
+        };
+
+        try{
+
+            const response=
+                await fetch(
+                    "/api/contact",
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(data)
+
+                    }
+                );
+
+            const result=
+                await response.text();
+
+            alert(result);
+
+        }
+
+        catch(error){
+
+            alert(
+                "Error while saving"
+            );
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
