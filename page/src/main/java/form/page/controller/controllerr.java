@@ -15,7 +15,7 @@ public class controllerr {
     public controllerr(Servicee serv){
         this.serv=serv;
     }
-    @GetMapping("/contact")
+    @GetMapping("/contacts")
     public List<ContactResponseDto> get(){
         return serv.get();
     }

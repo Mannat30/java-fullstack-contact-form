@@ -1,0 +1,134 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+}
+
+/* Navbar */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:black;
+    color:white;
+    padding:20px 40px;
+}
+
+.navbar ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+}
+
+
+/* Hero */
+
+.hero{
+    text-align:center;
+    padding:80px;
+}
+
+.hero h1{
+    font-size:50px;
+}
+
+.hero button{
+    padding:12px 25px;
+    border:none;
+    background:black;
+    color:white;
+    border-radius:5px;
+}
+
+
+/* About */
+
+#about{
+    padding:40px;
+}
+
+
+/* Features */
+
+#features{
+    padding:40px;
+}
+
+.card-container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    width:250px;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px lightgray;
+}
+
+
+/* Contact */
+
+#contact{
+    padding:40px;
+    text-align:center;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    width:350px;
+    margin:auto;
+    gap:15px;
+}
+
+input{
+    padding:12px;
+    border-radius:5px;
+    border:1px solid gray;
+}
+
+button{
+    padding:12px;
+    cursor:pointer;
+}
+.dashboard-cards{
+
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin:30px;
+}
+
+.box{
+
+    background:white;
+    padding:20px;
+    width:200px;
+    text-align:center;
+    border-radius:10px;
+
+    box-shadow:
+            0px 0px 10px lightgray;
+
+}
+
+/* Footer */
+
+footer{
+    background:black;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+}
