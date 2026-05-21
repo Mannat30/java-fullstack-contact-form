@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>DashBoard</title>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
+
 <body>
+
+<h1>Contact Dashboard</h1>
+
+
 <div class="dashboard-cards">
 
     <div class="box">
 
         <h2 id="totalContact">0</h2>
+
         <p>Total Contacts</p>
 
     </div>
 
+
     <div class="box">
 
         <h2 id="newContact">0</h2>
+
         <p>New Contacts</p>
 
     </div>
 
 </div>
 
-<h1>Contact DashBoard</h1>
+
+<input
+        type="number"
+        id="searchId"
+        placeholder="Enter ID">
+
+<button onclick="searchData()">
+
+    Search
+
+</button>
+
+<button onclick="loadData()">
+
+    Show All
+
+</button>
+
+
 
 <table border="1">
+
     <thead>
+
     <tr>
-        <th>Id</th>
+
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Subject</th>
@@ -36,47 +70,20 @@
         <th>Status</th>
         <th>Delete</th>
         <th>Edit</th>
+
     </tr>
+
     </thead>
+
 
     <tbody id="tabledata">
 
     </tbody>
 
 </table>
-<input
-        type="number"
-        id="searchId"
-        placeholder="Enter ID">
 
-<button
-        onclick="searchData()">
-
-    Search
-
-</button>
-
-<button
-        onclick="loadData()">
-
-    Show All
-
-</button>
 
 <script>
-    document.getElementById(
-        "totalContact"
-    ).innerText=data.length;
-
-    let newCount=
-
-        data.filter(
-            x=>x.status==="New"
-        ).length;
-
-    document.getElementById(
-        "newContact"
-    ).innerText=newCount;
 
     async function searchData(){
 
@@ -104,6 +111,28 @@
 <td>${contact.phone}</td>
 <td>${contact.status}</td>
 
+<td>
+
+<button
+onclick="deleteData(${contact.id})">
+
+Delete
+
+</button>
+
+</td>
+
+<td>
+
+<button
+onclick="editData(${contact.id})">
+
+Edit
+
+</button>
+
+</td>
+
 </tr>
 
 `;
@@ -117,76 +146,184 @@
     }
 
 
+
     async function editData(id){
 
-        let name = prompt("Enter new name");
-        let email = prompt("Enter new email");
-        let phone = prompt("Enter new phone");
-        let subject = prompt("Enter subject");
+        let name=
+            prompt(
+                "Enter new name"
+            );
 
-        const data = {
+        let email=
+            prompt(
+                "Enter new email"
+            );
+
+        let phone=
+            prompt(
+                "Enter new phone"
+            );
+
+        let subject=
+            prompt(
+                "Enter subject"
+            );
+
+
+        const data={
+
             name:name,
             email:email,
             phone:phone,
             subject:subject
+
         };
 
-        await fetch(`/api/contact/${id}`,{
-            method:"PUT",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(data)
-        });
+        await fetch(
+
+            `/api/contact/${id}`,
+
+            {
+
+                method:"PUT",
+
+                headers:{
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(data)
+
+            }
+
+        );
 
         loadData();
+
     }
+
+
 
     async function deleteData(id){
 
-        await fetch(`/api/contact/${id}`,{
-            method:"DELETE"
-        });
+        let confirmDelete=
 
-        loadData();
+            confirm(
+                "Are you sure?"
+            );
+
+        if(confirmDelete){
+
+            await fetch(
+
+                `/api/contact/${id}`,
+
+                {
+
+                    method:"DELETE"
+
+                }
+
+            );
+
+            alert(
+                "Deleted Successfully"
+            );
+
+            loadData();
+
+        }
+
     }
+
+
 
     async function loadData(){
 
-        const response = await fetch("/api/contacts");
-        const data = await response.json();
+        const response=
+            await fetch(
+                "/api/contacts"
+            );
 
-        let row = "";
+        const data=
+            await response.json();
+
+
+        document.getElementById(
+            "totalContact"
+        ).innerText=
+            data.length;
+
+
+        let newCount=
+
+            data.filter(
+                x=>x.status==="New"
+            ).length;
+
+
+        document.getElementById(
+            "newContact"
+        ).innerText=
+            newCount;
+
+
+
+        let row="";
+
 
         data.forEach(contact=>{
 
-            row += `
-        <tr>
+            row +=`
 
-            <td>${contact.id}</td>
-            <td>${contact.name}</td>
-            <td>${contact.email}</td>
-            <td>${contact.subject}</td>
-            <td>${contact.phone}</td>
-            <td>${contact.status}</td>
+<tr>
 
-            <td>
-                <button onclick="deleteData(${contact.id})">
-                    Delete
-                </button>
-            </td>
+<td>${contact.id}</td>
+<td>${contact.name}</td>
+<td>${contact.email}</td>
+<td>${contact.subject}</td>
+<td>${contact.phone}</td>
+<td>${contact.status}</td>
 
-            <td>
-                <button onclick="editData(${contact.id})">
-                    Edit
-                </button>
-            </td>
+<td>
 
-        </tr>
-        `;
+<button
+onclick="deleteData(${contact.id})">
+
+Delete
+
+</button>
+
+</td>
+
+
+<td>
+
+<button
+onclick="editData(${contact.id})">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
         });
 
-        document.getElementById("tabledata").innerHTML = row;
+
+        document
+            .getElementById(
+                "tabledata"
+            )
+            .innerHTML=row;
+
     }
 
     loadData();
@@ -194,4 +331,5 @@
 </script>
 
 </body>
+
 </html>
