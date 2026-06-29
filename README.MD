@@ -35,7 +35,7 @@ A full-stack Contact Management System built using Spring Boot, MySQL, HTML, CSS
 ### Database
 - MySQL
 
----
+
 
 ## Project Structure
 
